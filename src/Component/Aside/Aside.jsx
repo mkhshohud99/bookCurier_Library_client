@@ -27,7 +27,7 @@ const Aside = () => {
             <nav className="mt-6">
                 <ul className="space-y-2 px-4">
 
-                    <NavItem to="/dashboard" icon={<HomeIcon />} label="Dashboard" />
+                    <NavItem to="main" icon={<HomeIcon />} label="Dashboard" />
                     <NavItem to="add-books" icon={<UsersIcon />} label="Add Books" />
                     <NavItem to="/admin/books" icon={<BookOpenIcon />} label="Manage Books" />
                     <NavItem to="/admin/orders" icon={<ClipboardDocumentListIcon />} label="Orders" />

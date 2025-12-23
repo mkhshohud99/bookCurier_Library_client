@@ -3,7 +3,7 @@ import Aside from "../Component/Aside/Aside";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="">
       <Aside />
       <div className='md:ml-[300px] ml-4'> <Outlet/></div>
     </div>

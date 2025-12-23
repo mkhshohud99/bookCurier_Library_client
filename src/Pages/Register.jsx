@@ -5,6 +5,7 @@ import { updateProfile } from 'firebase/auth';
 import { Link, useLocation, useNavigate } from 'react-router';
 import auth from '../firebase/firebase.config';
 import toast from 'react-hot-toast';
+import useAxios from '../hooks/useAxios';
 // import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
@@ -20,7 +21,9 @@ const Register = () => {
         const name = e.target.name.value;
         const role = e.target.role.value;
         const photoUrl = e.target.photoUrl;
-        const file = photoUrl.files[0]
+        const file = photoUrl.files[0];
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const axiosInstance = useAxios();
 
         const upperCase = /[A-Z]/;
         const lowerCase = /[a-z]/;
@@ -62,8 +65,9 @@ const Register = () => {
                     }).then(() => {
                         console.log(auth.currentUser);
 
-                        axios.post('http://localhost:5000/users', formData)
+                        axiosInstance.post('/users', formData)
                             .then(res => {
+                                toast.success('Account Created Successfully!')
                                 console.log(res.data);
                             }).catch((err) => {
                                 console.log(err);
