@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import useAxios from "../../../hooks/useAxios";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const AddBooks = () => {
 
     const axiosInstance = useAxios()
+    const {user} = useContext(AuthContext)
 
   const [bookInfo, setBookInfo] = useState({
     name: "",
@@ -13,6 +15,7 @@ const AddBooks = () => {
     status: "available",
     price: "",
     image: "",
+    email: user?.email
   });
 
   const handleChange = (e) => {

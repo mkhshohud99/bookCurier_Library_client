@@ -7,6 +7,9 @@ import Login from "../Pages/Login";
 import DashboardLayout from "../DashboardLayout/DashboardLayout";
 import MainDashboard from "../Pages/Dashboard/MainDashboard/MainDashboard";
 import AddBooks from "../Pages/Dashboard/AddBooks/AddBooks";
+import ManageBook from "../Pages/ManageBooks/ManageBook";
+import OrderPage from "../Pages/OrderPage/OrderPage"
+import ManageOrders from "../Pages/ManageOrders/ManageOrders";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,10 @@ const router = createBrowserRouter([
         path: "signup",
         element: <Register />,
       },
+      {
+        path: '/books/id/:id',
+        element:<OrderPage/>
+      }
     ],
   },
   {
@@ -33,13 +40,21 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: 'main',
+        index:true,
         element: <MainDashboard />,
       },
       {
         path: 'add-books',
         Component: AddBooks
-      }
+      },
+      {
+        path:'manage-books',
+        Component: ManageBook
+      },
+      {
+        path:'manage-orders',
+        Component: ManageOrders
+      },
     ],
   }
 ]);

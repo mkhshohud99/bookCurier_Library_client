@@ -34,17 +34,6 @@ const Navbar = () => {
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li><Link to={'/'}>Home</Link></li>
-                        <li><Link to={'/services'}>Services</Link></li>
-                        <li><Link to={'/profile'}>My Profile</Link></li>
-                        {
-                            user && (
-                                <>
-                                    <li><Link to={'/add-services'}>Add Services</Link></li>
-                                    <li><Link to={'/my-services'}>My Services</Link></li>
-                                    <li><Link to={'/orders'}>My Orders</Link></li>
-                                </>
-                            )
-                        }
                     </ul>
                 </div>
                 <Link to={'/'} className="btn btn-ghost text-xl">Book Curier Library </Link>
@@ -52,17 +41,6 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/'}>Home</Link></li>
-                    <li><Link to={'/services'}>Services</Link></li>
-                    <li><Link to={'/profile'}>My Profile</Link></li>
-                    {
-                        user && (
-                            <>
-                                <li><Link to={'/add-services'}>Add Services</Link></li>
-                                <li><Link to={'/my-services'}>My Services</Link></li>
-                                <li><Link to={'/orders'}>My Orders</Link></li>
-                            </>
-                        )
-                    }
                 </ul>
             </div>
             <div className="navbar-end flex justify-end gap-2">

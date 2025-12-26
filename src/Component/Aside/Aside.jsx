@@ -27,11 +27,11 @@ const Aside = () => {
             <nav className="mt-6">
                 <ul className="space-y-2 px-4">
 
-                    <NavItem to="main" icon={<HomeIcon />} label="Dashboard" />
+                    <NavItem to="" icon={<HomeIcon />} label="Dashboard" />
                     <NavItem to="add-books" icon={<UsersIcon />} label="Add Books" />
-                    <NavItem to="/admin/books" icon={<BookOpenIcon />} label="Manage Books" />
-                    <NavItem to="/admin/orders" icon={<ClipboardDocumentListIcon />} label="Orders" />
-                    <NavItem to="/admin/settings" icon={<Cog6ToothIcon />} label="Settings" />
+                    <NavItem to="manage-books" icon={<BookOpenIcon />} label="Manage Books" />
+                    <NavItem to="manage-orders" icon={<ClipboardDocumentListIcon />} label="Orders" />
+                    {/* <NavItem to="/admin/settings" icon={<Cog6ToothIcon />} label="Settings" /> */}
 
                     <li className="border-t border-gray-700 mt-4 pt-4">
                         { user &&

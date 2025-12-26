@@ -2,17 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { AuthContext } from '../../provider/AuthProvider';
 
-const ManageBook = () => {
+const ManageOrders = () => {
 
 
-    const [books, setbooks] = useState([]);
+    const [orders, setOrders] = useState([]);
     const axiosInstance = useAxios();
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        axiosInstance.get(`/books/${user?.email}`)
+        axiosInstance.get(`/orders/${user?.email}`)
             .then(res => {
-                setbooks(res.data)
+                setOrders(res.data)
             }).catch(err => {
                 console.log(err)
             })
@@ -34,19 +34,20 @@ const ManageBook = () => {
                             <th>Name Of Author</th>
                             <th>Status</th>
                             <th>Price</th>
+                            <th>Customer's E-mail</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            books.map(book =>
+                            orders.map(order =>
                                 <tr>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={book.image}
+                                                        src={order.image}
                                                         alt="Avatar Tailwind CSS Component" />
                                                 </div>
                                             </div>
@@ -54,18 +55,18 @@ const ManageBook = () => {
                                     </td>
                                     <td>
                                             <div>
-                                                <div className="font-bold">{book.name}</div>
+                                                <div className="font-bold">{order.name}</div>
                                             </div>
 
                                     </td>
                                     <td>
-                                        {book.author}
+                                        {order.author}
                                     </td>
-                                    <td>{book.status}</td>
-                                    <td>{book.price}</td>
+                                    <td>{order.status}</td>
+                                    <td>{order.price}</td>
+                                    <td>{order.email}</td>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">Edit</button>
-                                        <button className="btn btn-error btn-xs">Delete</button>
+                                        <button className="btn btn-error btn-xs">Placed</button>
                                     </th>
                                 </tr>
                             )
@@ -79,4 +80,4 @@ const ManageBook = () => {
     );
 };
 
-export default ManageBook;
+export default ManageOrders;
