@@ -20,12 +20,14 @@ const MyOrders = () => {
         // e.preventDefault();
         const orderItem = orders.find(order=>order._id == id)
         const price = orderItem.price;
-        const customerEmail = orderItem.customerEmail;
+        const customer_email = orderItem.customerEmail;
         const customerName = user?.displayName;
+        console.log(customer_email);
+        
 
         const formData = {
             price,
-            customerEmail,
+            customer_email,
             customerName,
         }
 

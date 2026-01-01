@@ -13,6 +13,8 @@ import ManageOrders from "../Pages/ManageOrders/ManageOrders";
 import AllUsers from "../Pages/AllUsers/AllUsers";
 import PrivateRoute from "../RootLayout/PrivateRoute";
 import MyOrders from "../Pages/MyOders/MyOrders";
+import PageSuccess from "../Pages/PaymentPages/PageSuccess";
+import PageCancel from "../Pages/PaymentPages/PageCancel";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: '/my-orders',
         Component: MyOrders
+      },
+      {
+        path:'/payment-success',
+        Component: PageSuccess
+      },
+      {
+        path: '/payment-cancel',
+        Component: PageCancel
       }
     ],
   },
