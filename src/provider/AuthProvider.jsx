@@ -12,6 +12,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
 
     const [loading, setLoading] = useState(true);
+    const [roleLoading, setRoleLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [role, setRole] = useState('')
     const googleProvider = new GoogleAuthProvider;
@@ -30,9 +31,10 @@ const AuthProvider = ({ children }) => {
         axiosInstance.get(`/users/role/${user.email}`)
             .then(res => {
                 setRole(res.data.role)
-                console.log(role);
-                (res.data.role)
+                // console.log(role);
+                // (res.data.role)
                 setLoading(false)
+                setRoleLoading(false)
             })
     }, [user])
     useEffect(() => {
@@ -51,6 +53,8 @@ const AuthProvider = ({ children }) => {
         user,
         handleGoogleSignin,
         loading,
+        roleLoading,
+        role
     }
     return <AuthContext value={authData}>
         {children}

@@ -10,6 +10,9 @@ import AddBooks from "../Pages/Dashboard/AddBooks/AddBooks";
 import ManageBook from "../Pages/ManageBooks/ManageBook";
 import OrderPage from "../Pages/OrderPage/OrderPage"
 import ManageOrders from "../Pages/ManageOrders/ManageOrders";
+import AllUsers from "../Pages/AllUsers/AllUsers";
+import PrivateRoute from "../RootLayout/PrivateRoute";
+import MyOrders from "../Pages/MyOders/MyOrders";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +35,16 @@ const router = createBrowserRouter([
       {
         path: '/books/id/:id',
         element:<OrderPage/>
+      },
+      {
+        path: '/my-orders',
+        Component: MyOrders
       }
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     children: [
       {
         index:true,
@@ -54,6 +61,10 @@ const router = createBrowserRouter([
       {
         path:'manage-orders',
         Component: ManageOrders
+      },
+      {
+        path:'all-users',
+        Component: AllUsers
       },
     ],
   }

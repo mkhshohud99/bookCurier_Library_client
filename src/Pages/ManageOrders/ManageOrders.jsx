@@ -1,22 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import useAxios from '../../hooks/useAxios';
 import { AuthContext } from '../../provider/AuthProvider';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const ManageOrders = () => {
 
 
     const [orders, setOrders] = useState([]);
-    const axiosInstance = useAxios();
     const { user } = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
-        axiosInstance.get(`/orders/${user?.email}`)
+        axiosSecure.get(`/orders/${user?.email}`)
             .then(res => {
                 setOrders(res.data)
             }).catch(err => {
                 console.log(err)
             })
-    }, [axiosInstance, user])
+    }, [axiosSecure, user])
 
     // console.log(books);
 

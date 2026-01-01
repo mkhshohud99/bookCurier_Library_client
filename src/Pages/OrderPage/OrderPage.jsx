@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import useAxios from '../../hooks/useAxios';
 import { useParams } from 'react-router';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
@@ -10,43 +9,40 @@ const OrderPage = () => {
     const {user}= useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
     const [order, setOrder] = useState([])
-    const axiosInstance = useAxios()
 
 
     useEffect(() => {
-        axiosInstance.get(`/books/id/${id}`)
+        axiosSecure.get(`/books/id/${id}`)
             .then(res => {
                 setOrder(res.data);
             }).catch(err => {
                 console.log(err)
             })
-    }, [axiosInstance, id])
+    }, [axiosSecure, id])
 
-    const CustomerEmail = user?.email;
+
 
     const { image, name, author, status, price, _id } = order;
 
      const handelOrder = async () => {
 
     try {
-      const res = await axiosInstance.post('/orders',
-        order
-      );
-      console.log(res.data);
+      const res = await axiosSecure.post('/orders',
+        {name: name,
+        author: author,
+        price: price,
+        image: image,
+        bookId: _id,
+        CustomerEmail: user?.email,}
+    );
+    console.log(res.data);
       
       if(res.data.acknowledged == true){
         toast.success('Order place Successfully!')
       }
 
       // optional: reset form
-      setOrder({
-        name: name,
-        author: author,
-        price: price,
-        image: image,
-        bookId: _id,
-        CustomerEmail: CustomerEmail,
-      });
+      
     } catch (error) {
       console.error("Failed to add book", error);
     }

@@ -1,26 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../provider/AuthProvider';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { AuthContext } from '../../provider/AuthProvider';
+import useAxios from '../../hooks/useAxios';
 
-const ManageBook = () => {
-
-
-    const [books, setbooks] = useState([]);
-    const axiosSecure = useAxiosSecure()
+const MyOrders = () => {
     const { user } = useContext(AuthContext)
-
+    const [orders, setOrders] = useState([])
+    const axiosSecure = useAxiosSecure()
+    const axiosInstance = useAxios();
     useEffect(() => {
-        axiosSecure.get(`/books/${user?.email}`)
+        axiosSecure.get(`/my-orders/${user?.email}`)
             .then(res => {
-                setbooks(res.data)
+                setOrders(res.data)
             }).catch(err => {
                 console.log(err)
             })
     }, [axiosSecure, user])
+    const handlePayment = (id) => {
+        // e.preventDefault();
+        const orderItem = orders.find(order=>order._id == id)
+        const price = orderItem.price;
+        const customerEmail = orderItem.customerEmail;
+        const customerName = user?.displayName;
 
-    // console.log(books);
+        const formData = {
+            price,
+            customerEmail,
+            customerName,
+        }
 
+        axiosInstance.post('/create-payment', formData)
+        .then(res=>{
+            window.location.href = res.data.url;
+            console.log(res.data)
+        })
 
+    }
 
     return (
         <div>
@@ -34,37 +49,39 @@ const ManageBook = () => {
                             <th>Name Of Author</th>
                             <th>Status</th>
                             <th>Price</th>
+                            {/* <th>Customer's E-mail</th> */}
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            books.map(book =>
+                            orders.map(order =>
                                 <tr>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={book.image}
+                                                        src={order.image}
                                                         alt="Avatar Tailwind CSS Component" />
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                            <div>
-                                                <div className="font-bold">{book.name}</div>
-                                            </div>
+                                        <div>
+                                            <div className="font-bold">{order.name}</div>
+                                        </div>
 
                                     </td>
                                     <td>
-                                        {book.author}
+                                        {order.author}
                                     </td>
-                                    <td>{book.status}</td>
-                                    <td>{book.price}</td>
-                                    <th>
-                                        <button className="btn btn-ghost btn-xs">Edit</button>
+                                    <td>{order.status}</td>
+                                    <td>{order.price}</td>
+                                    {/* <td>{order.email}</td> */}
+                                    <th className='flex gap-4'>
+                                        <button onClick={()=>handlePayment(order._id)} className="btn btn-primary btn-xs">Payment</button>
                                         <button className="btn btn-error btn-xs">Delete</button>
                                     </th>
                                 </tr>
@@ -79,4 +96,4 @@ const ManageBook = () => {
     );
 };
 
-export default ManageBook;
+export default MyOrders;

@@ -14,6 +14,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const Aside = () => {
     const { user } = useContext(AuthContext);
+    const {role} = useContext(AuthContext)
     return (
         <aside className="w-64 min-h-screen bg-gray-900 text-gray-200 fixed">
             {/* Logo */}
@@ -31,12 +32,14 @@ const Aside = () => {
                     <NavItem to="add-books" icon={<UsersIcon />} label="Add Books" />
                     <NavItem to="manage-books" icon={<BookOpenIcon />} label="Manage Books" />
                     <NavItem to="manage-orders" icon={<ClipboardDocumentListIcon />} label="Orders" />
-                    {/* <NavItem to="/admin/settings" icon={<Cog6ToothIcon />} label="Settings" /> */}
+                    {
+                        role == 'admin'&& (<NavItem to="all-users" icon={<Cog6ToothIcon />} label="All Users" />)
+                    }
 
                     <li className="border-t border-gray-700 mt-4 pt-4">
                         { user &&
-                            <button className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-red-400 hover:bg-gray-800">
-                            <ArrowRightOnRectangleIcon onClick={()=> signOut(auth)} className="w-5 h-5" />
+                            <button onClick={()=> signOut(auth)} className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-red-400 hover:bg-gray-800">
+                            <ArrowRightOnRectangleIcon  className="w-5 h-5" />
                             Logout
                         </button>}
                         { !user && 

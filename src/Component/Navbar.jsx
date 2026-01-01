@@ -35,6 +35,11 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li><Link to={'/'}>Home</Link></li>
                     </ul>
+                    <ul
+                        tabIndex="-1"
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><Link to={'/my-orders'}>My Orders</Link></li>
+                    </ul>
                 </div>
                 <Link to={'/'} className="btn btn-ghost text-xl">Book Curier Library </Link>
             </div>
@@ -42,6 +47,12 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/'}>Home</Link></li>
                 </ul>
+                {
+                    user && <ul className="menu menu-horizontal px-1">
+                    <li><Link to={'/my-orders'}>My Orders</Link></li>
+                </ul>
+                }
+                
             </div>
             <div className="navbar-end flex justify-end gap-2">
                 {

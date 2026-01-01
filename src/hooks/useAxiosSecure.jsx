@@ -9,12 +9,12 @@ const axiosSecure = axios.create({
 
 const useAxiosSecure = () =>{
     const {user} = useContext(AuthContext)
-    console.log(user);
+    // console.log(user);
     
     
     useEffect(()=>{
         const reqInterceptor = axiosSecure.interceptors.request.use(config=>{
-            config.headers.Authorization = `Bearer ${user?.accessToken}`
+            config.headers.authorization = `Bearer ${user?.accessToken}`
             return config;
         })
         const resInterceptor = axiosSecure.interceptors.response.use((response)=>{

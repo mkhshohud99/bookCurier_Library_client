@@ -1,24 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../provider/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import useAxios from '../../../hooks/useAxios';
 import { Link } from 'react-router';
 
 const MainDashboard = () => {
     const { user } = useContext(AuthContext)
     const [books, setBooks] = useState([])
-    const axiosInstance = useAxios();
+    const axiosSecure = useAxiosSecure()
 
     const userName = user?.displayName;
 
     useEffect(() => {
-        axiosInstance.get(`/books/${user?.email}`)
+        axiosSecure.get(`/books/${user?.email}`)
             .then(res => {
                 setBooks(res.data)
             }).catch(err => {
                 console.log(err)
             })
-    }, [axiosInstance, user])
+    }, [axiosSecure, user])
     return (
         <div className="text-white mt-5">
             <h1 className="text-3xl font-bold">Hello, MR/MRS {userName}, here is your all books</h1>

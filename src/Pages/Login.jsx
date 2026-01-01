@@ -63,7 +63,7 @@ const Login = () => {
                             <input name='password' type="password" className="input" placeholder="Password" />
                             <div><button onClick={handleForgate} className="link link-hover">Forgot password?</button></div>
                             {/* <button onClick={googleSignin} className="btn"><FcGoogle /> Signup with google</button> */}
-                            <div><span>Don't have an account?</span> <Link to={'/singup'} className='text-blue-500'>Register</Link></div>
+                            <div><span>Don't have an account?</span> <Link to={'/signup'} className='text-blue-500'>Register</Link></div>
                             <button  className="btn btn-neutral mt-4">Login</button>
                         </form>
                     </div>
