@@ -47,6 +47,12 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/'}>Home</Link></li>
                 </ul>
+                <ul className="menu menu-horizontal px-1">
+                    <li><Link to={'/all-book'}>All Books</Link></li>
+                </ul>
+                <ul className="menu menu-horizontal px-1">
+                    <li><Link to={'/covagage'}>Our Coverage</Link></li>
+                </ul>
                 {
                     user && <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/my-orders'}>My Orders</Link></li>

@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router';
-import useAxios from '../../hooks/useAxios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const PageSuccess = () => {
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get('session_id');
-    const axiosInstance = useAxios();
+    const axiosSecure = useAxiosSecure()
 
     useEffect(()=>{
-        axiosInstance.post(`/success-payment?session_id=${sessionId}`)
+        axiosSecure.post(`/success-payment?session_id=${sessionId}`)
         .then(res=>{
             console.log(res.data);
             
         })
-    },[axiosInstance, sessionId])
+    },[axiosSecure, sessionId])
 
     return (
         <div className='flex justify-center items-center'>

@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import useAxios from "../../../hooks/useAxios";
 import { AuthContext } from "../../../provider/AuthProvider";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddBooks = () => {
 
-    const axiosInstance = useAxios()
+    const axiosSecure = useAxiosSecure()
     const {user} = useContext(AuthContext)
 
   const [bookInfo, setBookInfo] = useState({
@@ -47,7 +47,7 @@ const AddBooks = () => {
     e.preventDefault();
 
     try {
-      const res = await axiosInstance.post('/books',
+      const res = await axiosSecure.post('/books',
         bookInfo
       );
       console.log(res.data);

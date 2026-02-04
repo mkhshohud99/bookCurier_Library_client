@@ -15,6 +15,8 @@ import PrivateRoute from "../RootLayout/PrivateRoute";
 import MyOrders from "../Pages/MyOders/MyOrders";
 import PageSuccess from "../Pages/PaymentPages/PageSuccess";
 import PageCancel from "../Pages/PaymentPages/PageCancel";
+import Covarage from "../Pages/covarage/Covarage";
+import AB from "../Pages/AllBooks/AB";
 
 const router = createBrowserRouter([
   {
@@ -23,8 +25,8 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
-        element: <Home />,
+        path:'/',
+        Component: Home
       },
       {
         path: "login",
@@ -49,6 +51,15 @@ const router = createBrowserRouter([
       {
         path: '/payment-cancel',
         Component: PageCancel
+      },
+      {
+        path: '/covagage',
+        Component: Covarage,
+        loader: () => fetch('./serviceCenters.json').then(res=> res.json())
+      },
+      {
+        path: '/all-book',
+        Component: AB
       }
     ],
   },

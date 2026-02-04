@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../provider/AuthProvider';
-import useAxios from '../../hooks/useAxios';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext)
     const [orders, setOrders] = useState([])
     const axiosSecure = useAxiosSecure()
-    const axiosInstance = useAxios();
     useEffect(() => {
         axiosSecure.get(`/my-orders/${user?.email}`)
             .then(res => {
@@ -31,7 +29,7 @@ const MyOrders = () => {
             customerName,
         }
 
-        axiosInstance.post('/create-payment', formData)
+        axiosSecure.post('/create-payment', formData)
         .then(res=>{
             window.location.href = res.data.url;
             console.log(res.data)

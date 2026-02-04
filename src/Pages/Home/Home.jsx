@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import useAxios from '../../hooks/useAxios';
 import { Link } from 'react-router';
+import WCU from '../WhyChoseUs/WCU';
+import useAxios from '../../hooks/useAxios';
+import OurValuableClient from '../../Component/OurValuableClient';
 
 const Home = () => {
     const [books, setBooks] = useState([])
     const [totalRequest, setTotalRequest] = useState(0)
-    const [itemPerPage, setItemPerPage] = useState(9)
+    const [itemPerPage] = useState(9)
     const [currentPage, setCurrentPage] = useState(1)
-    const axiosInstance = useAxios();
+    const axiosInstance = useAxios()
 
     useEffect(() => {
         axiosInstance.get(`/books?page=${currentPage - 1}&size=${itemPerPage}`)
@@ -33,9 +35,9 @@ const Home = () => {
         }
     }
 
-    console.log(books)
-    console.log(totalRequest)
-    console.log(pages)
+    // console.log(books)
+    // console.log(totalRequest)
+    // console.log(pages)
 
     return (
         <div>
@@ -77,6 +79,8 @@ const Home = () => {
                 }
                 <button onClick={handleNext} className="btn">Next</button>
             </div>
+            <WCU></WCU>
+            <OurValuableClient></OurValuableClient>
         </div>
     );
 };
