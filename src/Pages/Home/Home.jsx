@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import WCU from '../WhyChoseUs/WCU';
 import useAxios from '../../hooks/useAxios';
 import OurValuableClient from '../../Component/OurValuableClient';
+import { addToDB } from '../../Component/Utillity/addToDb';
 
 const Home = () => {
     const [books, setBooks] = useState([])
@@ -24,15 +25,19 @@ const Home = () => {
     const numberOfPage = Math.ceil(totalRequest / itemPerPage)
     const pages = [...Array(numberOfPage).keys()].map(e => e + 1)
 
-    const handlePrev = () =>{
-        if(currentPage>1){
-            setCurrentPage(currentPage-1)
+    const handlePrev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
         }
     }
-    const handleNext = () =>{
-        if(currentPage<pages.length){
-            setCurrentPage(currentPage+1)
+    const handleNext = () => {
+        if (currentPage < pages.length) {
+            setCurrentPage(currentPage + 1)
         }
+    }
+
+    const handleAddBook=(id)=>{
+        addToDB(id)
     }
 
     // console.log(books)
@@ -59,8 +64,9 @@ const Home = () => {
                                     </button>
                                     <button>{book.status}</button>
                                 </div>
-                                <div className="card-actions justify-end">
-                                    <Link to={`/books/id/${book._id}`}><button className="btn btn-primary">Order Now</button></Link>
+                                <div className="card-actions flex justify-between">
+                                    <Link onClick={() => handleAddBook(`${book?._id}`)}><button className="btn btn-success">Add to Wishlist</button></Link>
+                                    <Link to={`/books/id/${book?._id}`}><button className="btn btn-primary">Order Now</button></Link>
 
                                 </div>
                             </div>

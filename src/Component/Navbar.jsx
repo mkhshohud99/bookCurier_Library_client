@@ -15,9 +15,9 @@ const Navbar = () => {
     const handleThemeColour = () => {
         setIsChecked(!isCheked)
         if (isCheked) {
-            document.querySelector('html').setAttribute('data-theme', 'dark')
-        } else {
             document.querySelector('html').setAttribute('data-theme', 'light')
+        } else {
+            document.querySelector('html').setAttribute('data-theme', 'dark')
         }
 
     }
@@ -53,6 +53,10 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/covagage'}>Our Coverage</Link></li>
                 </ul>
+                <ul className="menu menu-horizontal px-1">
+                    <li><Link to={'/wish-list'}>Wish List</Link></li>
+                </ul>
+
                 {
                     user && <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/my-orders'}>My Orders</Link></li>
