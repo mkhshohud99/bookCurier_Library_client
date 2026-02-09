@@ -30,7 +30,7 @@ const Covarage = () => {
 
     return (
         <div className='p-8'>
-            <h2 className="text-5xl">We are available in 64 districts</h2>
+            <h2 className="text-5xl">We are available in Bangladesh, USA, UK, Australia and India</h2>
             <div>
                 {/* search  */}
                 <form onSubmit={handleSearch}>
