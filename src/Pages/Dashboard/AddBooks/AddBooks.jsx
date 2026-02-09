@@ -28,15 +28,23 @@ const AddBooks = () => {
     const imageFile = e.target.files[0];
     const formData = new FormData();
     formData.append("image", imageFile);
+    
 
+    
     try {
       const res = await axios.post(
-        "https://api.imgbb.com/1/upload?key=5a45477102df111cb02a4e4abd8e3b88",
-        formData
+        "https://api.imgbb.com/1/upload?key=e5593d9a13dc62bed14cf45f36d08651",
+        formData,{
+          headers:{
+            "Content-Type": "multipart/form-data"
+          }
+        }
       );
 
       const imageUrl = res.data.data.display_url;
       setBookInfo({ ...bookInfo, image: imageUrl });
+      
+      
     } catch (error) {
       console.error("Image upload failed", error);
     }
@@ -68,6 +76,9 @@ const AddBooks = () => {
       console.error("Failed to add book", error);
     }
   };
+
+  console.log(bookInfo);
+  
 
   return (
     <div className="max-w-xl bg-slate-800 p-6 rounded-lg text-white">
