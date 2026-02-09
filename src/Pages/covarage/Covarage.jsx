@@ -2,14 +2,16 @@ import React, { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { useLoaderData } from 'react-router';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+
+
     
 
 const Covarage = () => {
-    const position = [23.6850, 90.3563];
+    const position = [20.685, 20.356];
     const serviceCenters = useLoaderData();
     const mapRef = useRef(null);
 
-    console.log(serviceCenters);
+    // console.log(serviceCenters);
     
     
     const handleSearch = e => {
@@ -54,7 +56,7 @@ const Covarage = () => {
             <div className='border w-full h-[800px]'>
                 <MapContainer
                     center={position}
-                    zoom={8}
+                    zoom={3}
                     scrollWheelZoom={false}
                     className='h-[800px]'
                     ref={mapRef}

@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: '/covagage',
         Component: Covarage,
-        loader: () => fetch('/serviceCenters.json').then(res=> res.json())
+        loader: () => fetch('serviceCenters.json').then(res=> res.json())
       },
       {
         path: '/all-book',
