@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
+import "../../leafletIconFix";
 import { useLoaderData } from 'react-router';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
