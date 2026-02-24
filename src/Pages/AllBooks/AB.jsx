@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+// import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import { addToDB } from '../../Component/Utillity/addToDb';
+import useAxios from '../../hooks/useAxios';
 
 const AB = () => {
     const { user } = useContext(AuthContext)
     const [books, setBooks] = useState([])
-    const axiosSecure = useAxiosSecure()
+    // const axiosSecure = useAxiosSecure()
+    const axiosInstance = useAxios()
 
     const [search , setSerch] = useState('');
     const filteredItem = books.filter((item) => `${item.name}`.toLowerCase().includes(search.toLowerCase()))
@@ -19,13 +21,13 @@ const AB = () => {
     }
 
     useEffect(() => {
-        axiosSecure.get(`/all-books`)
+        axiosInstance.get(`/all-books`)
             .then(res => {
                 setBooks(res.data)
             }).catch(err => {
                 console.log(err)
             })
-    }, [axiosSecure, user])
+    }, [axiosInstance, user])
 
     return (
         <div className="text-white mt-5">

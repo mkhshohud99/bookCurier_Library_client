@@ -10,6 +10,7 @@ const MyOrders = () => {
         axiosSecure.get(`/my-orders/${user?.email}`)
             .then(res => {
                 setOrders(res.data)
+                console.log(setOrders);
             }).catch(err => {
                 console.log(err)
             })

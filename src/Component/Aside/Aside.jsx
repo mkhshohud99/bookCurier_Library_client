@@ -35,6 +35,9 @@ const Aside = () => {
                     {
                         role == 'admin'&& (<NavItem to="all-users" icon={<Cog6ToothIcon />} label="All Users" />)
                     }
+                    {
+                        user && (<NavItem to="my-profile" icon={<Cog6ToothIcon />} label="My Profile" />)
+                    }
 
                     <li className="border-t border-gray-700 mt-4 pt-4">
                         { user &&

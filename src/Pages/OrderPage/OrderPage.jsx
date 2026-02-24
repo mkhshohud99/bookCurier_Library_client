@@ -22,7 +22,7 @@ const OrderPage = () => {
 
 
 
-    const { image, name, author, status, price, _id } = order;
+    const { image, name, author, status, price, _id, email } = order;
 
      const handelOrder = async () => {
 
@@ -33,9 +33,11 @@ const OrderPage = () => {
         price: price,
         image: image,
         bookId: _id,
-        CustomerEmail: user?.email,}
+        CustomerEmail: user?.email,
+        email: email,
+    }
     );
-    console.log(res.data);
+    // console.log(res.data);
       
       if(res.data.acknowledged == true){
         toast.success('Order place Successfully!')

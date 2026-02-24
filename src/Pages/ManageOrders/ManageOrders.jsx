@@ -18,7 +18,7 @@ const ManageOrders = () => {
             })
     }, [axiosSecure, user])
 
-    // console.log(books);
+    console.log(orders);
 
 
 

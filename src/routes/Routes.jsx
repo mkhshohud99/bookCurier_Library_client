@@ -18,6 +18,7 @@ import PageCancel from "../Pages/PaymentPages/PageCancel";
 import Covarage from "../Pages/covarage/Covarage";
 import AB from "../Pages/AllBooks/AB";
 import WishList from "../Pages/WishList/WishList";
+import MyProfile from "../Pages/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
       {
         path:'all-users',
         Component: AllUsers
+      },
+      {
+        path:'my-profile',
+        Component: MyProfile
       },
     ],
   }

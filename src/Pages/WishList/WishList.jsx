@@ -1,22 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+// import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../provider/AuthProvider';
 import { getStoredDB } from '../../Component/Utillity/addToDb';
+import useAxios from '../../hooks/useAxios';
 
 const WishList = () => {
     const { user } = useContext(AuthContext)
     const [books, setBooks] = useState([])
-    const axiosSecure = useAxiosSecure()
+    const axiosInstance = useAxios()
+    // const axiosSecure = useAxiosSecure()
     const [list, setList] = useState([])
 
     useEffect(() => {
-        axiosSecure.get(`/all-books`)
+        axiosInstance.get(`/all-books`)
             .then(res => {
                 setBooks(res.data)
             }).catch(err => {
                 console.log(err)
             })
-    }, [axiosSecure, user])
+    }, [axiosInstance, user])
 
     
     
