@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         loader: () => fetch('serviceCenters.json').then(res=> res.json())
       },
       {
-        path: '/all-book',
+        path: '/all-books',
         Component: AB
       },
       {

@@ -1,66 +1,68 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
-// import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { addToDB } from '../../Component/Utillity/addToDb';
+import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
 
 const AB = () => {
-    const { user } = useContext(AuthContext)
-    const [books, setBooks] = useState([])
-    // const axiosSecure = useAxiosSecure()
+
+    const { user, } = useContext(AuthContext)
     const axiosInstance = useAxios()
+    const [search, setSearch] = useState('');
 
-    const [search , setSerch] = useState('');
-    const filteredItem = books.filter((item) => `${item.name}`.toLowerCase().includes(search.toLowerCase()))
-
-    // console.log(filteredItem);
-
-    const handleAddBook=(id)=>{
+    const handleAddBook = (id) => {
         addToDB(id)
     }
 
-    useEffect(() => {
-        axiosInstance.get(`/all-books`)
-            .then(res => {
-                setBooks(res.data)
-            }).catch(err => {
-                console.log(err)
-            })
-    }, [axiosInstance, user])
+    const { data: books = [] } = useQuery({
+        queryKey: ['books', search, user?.email],
+
+       
+
+        queryFn: async () => {
+            const res = await axiosInstance.get(`/all-books?search=${search}`);
+            return res.data;
+        }
+    })
+
+  
 
     return (
         <div className="text-white mt-5">
             <div className='flex justify-between mx-10'>
-                <div>
-                    <h3 className='text-white font-bold'>Total books: {filteredItem.length}</h3>
-                </div>
-                <div>
-                    <input className=' font-bold px-5 border-2 rounded-2xl' onChange={(e)=> setSerch(e.target.value)} type='text' placeholder='Search here'></input>
-                </div>
+                <h3>Total books: {books.length}</h3>
+                <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    className='px-5 border-2 rounded-2xl'
+                    type='text'
+                    placeholder='Search here'
+                />
             </div>
-            <div className='grid grid-cols-3 gap-5 mx-10 my-5 contain-content'>
+
+            <div className='grid grid-cols-3 gap-5 mx-10 my-5'>
                 {
-                    filteredItem.map(book =>
+                    books.map(book =>
                         <div key={book._id} className="card bg-base-100 w-96 shadow-sm">
                             <figure>
-                                <img className='h-[300px] w-fit'
-                                    src={book.image}
-                                    alt="Books" />
+                                <img className='h-[300px]' src={book.image} alt="Books" />
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">{book.name}</h2>
                                 <h2 className='font-bold'>{book.author}</h2>
-                                <div className='flex justify-between'>
-                                    <button className='font-semibold'>
-                                        <span className='text-2xl'>৳</span> {book.price}
-                                    </button>
-                                    <button>{book.status}</button>
-                                </div>
-                                <div className="card-actions flex justify-between">
-                                    <Link onClick={()=>handleAddBook(`${book?._id}`)}><button className="btn btn-success">Add to Wishlist</button></Link>
-                                    <Link to={`/books/id/${book?._id}`}><button className="btn btn-primary">Order Now</button></Link>
 
+                                <div className="card-actions flex justify-between">
+                                    <button
+                                        onClick={() => handleAddBook(book._id)}
+                                        className="btn btn-success">
+                                        Add to Wishlist
+                                    </button>
+
+                                    <Link to={`/books/id/${book._id}`}>
+                                        <button className="btn btn-primary">
+                                            Order Now
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
